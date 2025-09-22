@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Coursera Prototype</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+    /* --------------------
+    Global Styles & Variables
+    -------------------- */
+    :root {
+        --primary-color: #002e6e;
+        --secondary-color: #f6f6f6;
+        --light-text-color: #555;
+        --border-color: #e0e0e0;
+        --accent-color: #ffc107;
+    }
+
+    body {
+        background-color: var(--secondary-color);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    h1, h2, h3, h4, h5 {
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* --------------------
+    Navigation
+    -------------------- */
+    .navbar-coursera {
+        background-color: #ffffff;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .navbar-brand {
+        font-weight: 700;
+        color: var(--primary-color) !important;
+    }
+    .nav-link {
+        color: #333 !important;
+    }
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        font-weight: 600;
+        padding: 8px 20px;
+    }
+    .btn-primary:hover {
+        background-color: #001a40;
+        border-color: #001a40;
+    }
+
+    /* --------------------
+    Hero Section
+    -------------------- */
+    .hero-section {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero-section::before {
+        content: '';
+        background-image: url('https://d3njjcbhclacxd.cloudfront.net/web/img/hero/2024/Hero_Img_1440x400.jpg');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.2;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    .search-box {
+        max-width: 600px;
+        margin: 25px auto 0;
+    }
+    .search-box .form-control {
+        border-radius: 5px 0 0 5px;
+    }
+    .search-box .btn {
+        border-radius: 0 5px 5px 0;
+    }
+
+    /* --------------------
+    Collaborators Section
+    -------------------- */
+    .collaborators {
+        padding: 50px 0;
+        background-color: #ffffff;
+        text-align: center;
+    }
+    .collaborators h4 {
+        color: #555;
+    }
+    .collaborators .logo {
+        height: 40px;
+        margin: 0 20px;
+        filter: grayscale(100%);
+        opacity: 0.6;
+        transition: filter 0.3s ease, opacity 0.3s ease;
+    }
+    .collaborators .logo:hover {
+        filter: none;
+        opacity: 1;
+    }
+
+    /* --------------------
+    Purpose Section
+    -------------------- */
+    .purpose-section {
+        padding: 50px 0;
+    }
+    .purpose-box {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .purpose-box h4 {
+        font-weight: bold;
+        color: var(--primary-color);
+        margin-right: 20px;
+    }
+    .purpose-button {
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 10px 20px;
+        background-color: #f8f9fa;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        transition: background-color 0.2s;
+        display: flex;
+        align-items: center;
+        margin: 5px;
+    }
+    .purpose-button i {
+        margin-right: 8px;
+        font-size: 1.1rem;
+    }
+    .purpose-button:hover {
+        background-color: #e0e0e0;
+    }
+
+    /* --------------------
+    Promotional Banner
+    -------------------- */
+    .promo-banner {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 50px 0;
+    }
+    .promo-banner .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .promo-content {
+        flex: 1;
+        max-width: 50%;
+        text-align: left;
+    }
+    .promo-content h2 {
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+    }
+    .promo-content p {
+        font-size: 1.1rem;
+    }
+    .promo-buttons .btn {
+        padding: 12px 24px;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-right: 15px;
+    }
+    .promo-image {
+        flex: 1;
+        max-width: 50%;
+        text-align: right;
+    }
+    .promo-image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* --------------------
+    GenAI Section
+    -------------------- */
+    .genai-section {
+        background-color: #ffffff;
+        padding: 50px 0;
+        margin-top: 50px;
+    }
+    .genai-card-container {
+        background-color: #f0f4f7;
+        border-radius: 15px;
+        padding: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        overflow: hidden;
+    }
+    .genai-text-column {
+        flex: 0 0 25%;
+        padding-right: 20px;
+        position: relative;
+        z-index: 1;
+    }
+    .genai-text-column h3 {
+        font-weight: bold;
+        color: #333;
+    }
+    .genai-text-column p {
+        color: #555;
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+    .genai-cards-column {
+        flex: 1;
+        display: flex;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 10px;
+        position: relative;
+        z-index: 1;
+    }
+    .genai-card-wrapper {
+        flex: 0 0 320px;
+        margin-right: 20px;
+    }
+    .genai-card {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        transition: transform 0.2s;
+        cursor: pointer;
+    }
+    .genai-card:hover {
+        transform: translateY(-5px);
+    }
+    .genai-card-img-top {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+    .genai-card-body {
+        padding: 15px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .genai-card-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+    .genai-card-subtitle {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 10px;
+    }
+    .genai-card-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        z-index: 2;
+    }
+    .genai-category-tabs {
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+    }
+    .genai-category-tabs .btn {
+        margin-right: 10px;
+        border-radius: 20px;
+        padding: 5px 15px;
+        font-size: 0.9rem;
+    }
+    .genai-category-tabs .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+    .genai-category-tabs .btn-outline-secondary {
+        border-color: #cccccc;
+        color: #666;
+    }
+    .genai-category-tabs .btn-outline-secondary:hover {
+        background-color: #e0e0e0;
+        color: #333;
+    }
+    .genai-button-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        transition: background-color 0.2s ease;
+    }
+    .genai-button-primary:hover {
+        background-color: #001a40;
+        color: white;
+    }
+    .genai-button-primary i {
+        margin-left: 8px;
+    }
+
+    @media (max-width: 992px) {
+        .genai-text-column {
+            flex: 0 0 100%;
+            padding-right: 0;
+            margin-bottom: 30px;
+        }
+        .genai-cards-column {
+            width: 100%;
+            flex-wrap: nowrap;
+        }
+        .genai-card-wrapper {
+            flex: 0 0 80%;
+        }
+    }
+
+    /* --------------------
+    Coursera for Business Section
+    -------------------- */
+    .business-section {
+        background-color: #F8F9FA;
+        padding: 80px 0;
+    }
+    .business-section .col-lg-6 {
+        padding: 0 40px;
+    }
+    .business-section h2 {
+        font-size: 2.8rem;
+        line-height: 1.2;
+    }
+    .business-section p {
+        font-size: 1.1rem;
+        color: #333;
+    }
+    .business-section .logo-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        align-items: center;
+        justify-items: center;
+    }
+    .business-section .logo-grid img {
+        max-width: 100px;
+        max-height: 50px;
+        filter: grayscale(100%);
+        opacity: 0.6;
+        transition: opacity 0.3s;
+    }
+    .business-section .logo-grid img:hover {
+        opacity: 1;
+    }
+    .business-section .btn-primary {
+        padding: 12px 24px;
+        font-size: 1.1rem;
+    }
+    .business-section .teams-link {
+        font-size: 1rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        margin-left: 15px;
+    }
+
+    /* --------------------
+    Degree Programs
+    -------------------- */
+    .degree-section {
+        padding: 50px 0;
+    }
+    .degree-card {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+        background-color: white;
+        cursor: pointer;
+    }
+    .degree-card:hover {
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transform: translateY(-5px);
+    }
+    .degree-card-img-top {
+        height: 180px;
+        object-fit: cover;
+    }
+    .degree-card-body {
+        padding: 15px;
+    }
+    .degree-card-logo {
+        height: 25px;
+        margin-bottom: 10px;
+    }
+    .degree-card-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+    .degree-card-subtitle {
+        font-size: 0.85rem;
+        color: #666;
+    }
+    .degree-card .btn-link {
+        font-size: 0.9rem;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    /* --------------------
+    Role Section
+    -------------------- */
+    .role-section {
+        padding: 50px 0;
+    }
+    .role-section .card {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+        cursor: pointer;
+    }
+    .role-section .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    .role-section .card-body {
+        padding: 20px;
+    }
+    .role-section .tag-pill {
+        display: inline-block;
+        background-color: #f0f0f0;
+        border-radius: 20px;
+        padding: 5px 15px;
+        margin: 5px;
+        font-size: 0.85rem;
+        color: #333;
+    }
+    .role-section .card-img-top {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        max-height: 150px;
+        object-fit: cover;
+    }
+    .role-list-item {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 5px;
+        font-size: 0.9rem;
+        color: #333;
+    }
+    
+    /* --------------------
+    Courses Section
+    -------------------- */
+    .courses-section {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .course-card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+        cursor: pointer;
+        background-color: white;
+    }
+    .course-card:hover {
+        transform: translateY(-5px);
+    }
+    .course-card img {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+    .card-title {
+        color: var(--primary-color);
+        font-weight: bold;
+    }
+    .card-text-light {
+        color: var(--light-text-color);
+        font-size: 0.9rem;
+    }
+    .card-body .fa-star {
+        color: var(--accent-color);
+    }
+
+    /* --------------------
+    Most Popular Certificates Section
+    -------------------- */
+    .certificate-section {
+        padding: 50px 0;
+    }
+    .certificate-card {
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+        background-color: #ffffff;
+    }
+    .certificate-card:hover {
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transform: translateY(-5px);
+    }
+    .certificate-card-img-top {
+        height: 180px;
+        object-fit: cover;
+    }
+    .certificate-card-body {
+        padding: 15px;
+    }
+    .certificate-logo {
+        height: 25px;
+        margin-bottom: 10px;
+    }
+    .certificate-badge-container {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 5px;
+    }
+    .certificate-badge {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #333;
+    }
+    .certificate-badge.ai-badge {
+        background-color: #e6f3ff;
+        color: #0066cc;
+    }
+    .certificate-card-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+    .certificate-card-subtitle {
+        font-size: 0.85rem;
+        color: #666;
+    }
+    .certificate-button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .certificate-button-primary {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+        font-weight: 600;
+        padding: 10px 25px;
+        border-radius: 5px;
+    }
+    .certificate-button-outline {
+        background-color: white;
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+        font-weight: 600;
+        padding: 10px 25px;
+        border-radius: 5px;
+    }
+    .certificate-button-outline:hover {
+        background-color: var(--primary-color);
+        color: white;
+    }
+
+    /* --------------------
+    Professional Certificates Section
+    -------------------- */
+    .professional-certificates-section {
+        background-color: var(--secondary-color);
+        padding: 80px 0;
+    }
+    .professional-certificates-section .section-title {
+        position: relative;
+    }
+    .professional-certificates-section .section-title h2 {
+        font-weight: bold;
+    }
+    .professional-certificates-section .section-title img {
+        position: absolute;
+        top: -50px;
+        right: 0;
+        max-width: 400px;
+        opacity: 0.1;
+    }
+    .certificate-list-column {
+        padding-right: 30px;
+    }
+    .certificate-list-item {
+        background-color: white;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        transition: box-shadow 0.2s ease;
+        cursor: pointer;
+    }
+    .certificate-list-item:hover {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+    .certificate-list-item-logo {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        margin-right: 20px;
+    }
+    .certificate-list-item-content h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+    .certificate-list-item-content p {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 5px;
+    }
+    .certificate-list-item-time {
+        font-size: 0.85rem;
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+    .certificate-category-box {
+        background-color: white;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    .certificate-category-box:hover {
+        background-color: #f8f8f8;
+    }
+    .certificate-category-box h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-coursera">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">coursera</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Explore
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Courses</a></li>
+                        <li><a class="dropdown-item" href="#">Degrees</a></li>
+                        <li><a class="dropdown-item" href="#">Certificates</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">For Enterprise</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Log In</a>
+                </li>
+                <li class="nav-item ms-lg-3">
+                    <button class="btn btn-primary" href="#">Join for Free</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="display-3 fw-bold">Learn without limits</h1>
+        <p class="lead">Start, switch, or advance your career with more than 5,800 courses, Professional Certificates, and degrees from world-class universities and companies.</p>
+        <div class="input-group search-box">
+            <input type="text" class="form-control form-control-lg" placeholder="What do you want to learn?" aria-label="Search">
+            <button class="btn btn-primary" type="button">Search</button>
+        </div>
+    </div>
+</div>
+
+---
+
+<div class="collaborators">
+    <div class="container">
+        <h4 class="mb-4">We collaborate with <span class="fw-bold" style="color: var(--primary-color);">350+ leading universities and companies</span></h4>
+        <div class="d-flex justify-content-center align-items-center flex-wrap">
+            <img class="logo" src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Illinois.svg" alt="Illinois">
+            <img class="logo" src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Duke.svg" alt="Duke">
+            <img class="logo" src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Google.svg" alt="Google">
+            <img class="logo" src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Michigan.svg" alt="Michigan">
+            <img class="logo" src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/IBM.svg" alt="IBM">
+            <img class="logo" src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Imperial.svg" alt="Imperial College London">
+            <img class="logo" src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Stanford.svg" alt="Stanford">
+            <img class="logo" src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Penn.svg" alt="Penn">
+        </div>
+    </div>
+</div>
+
+---
+
+<div class="business-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="mb-4">Drive your business forward by empowering your talent</h2>
+                <p>Train teams with industry-leading experts and universities, enhanced by AI tools and recognized credentials.</p>
+                <div class="d-flex align-items-center mb-4">
+                    <button class="btn btn-primary me-3">Discover Coursera for Business</button>
+                    <a href="#" class="teams-link">Check out Coursera for Teams <i class="fas fa-external-link-alt ms-1"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="logo-grid">
+                    <img src="https://i.imgur.com/k6U1XpC.png" alt="L'Oréal Logo">
+                    <img src="https://i.imgur.com/vHqB5oW.png" alt="P&G Logo">
+                    <img src="https://i.imgur.com/gK1qWJc.png" alt="TATA Logo">
+                    <img src="https://i.imgur.com/V72s5fD.png" alt="DANONE Logo">
+                    <img src="https://i.imgur.com/YwP2lP7.png" alt="Emirates NBD Logo">
+                    <img src="https://i.imgur.com/dK5uL8v.png" alt="Reliance Logo">
+                    <img src="https://i.imgur.com/XF9r0y5.png" alt="Capgemini Logo">
+                    <img src="https://i.imgur.com/L4R17B9.png" alt="PETROBRAS Logo">
+                    <img src="https://i.imgur.com/rW6w5F8.png" alt="GE Logo">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+---
+
+<div class="genai-section">
+    <div class="container">
+        <div class="genai-card-container">
+            <div class="row w-100 g-4">
+                <div class="col-lg-3 col-md-12 genai-text-column">
+                    <div class="genai-category-tabs d-flex d-lg-block">
+                        <button class="btn btn-primary me-2 me-lg-0 mb-lg-2">New</button>
+                        <button class="btn btn-outline-secondary me-2 me-lg-0 mb-lg-2">Beginner</button>
+                        <button class="btn btn-outline-secondary me-2 me-lg-0 mb-lg-2">Popular</button>
+                        <button class="btn btn-outline-secondary">Tools</button>
+                    </div>
+                    <h3 class="mb-3">Get started with GenAI</h3>
+                    <p>Identify, develop, and execute impactful GenAI business strategies.</p>
+                    <a href="#" class="genai-button-primary">View all GenAI <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="col-lg-9 col-md-12 genai-cards-column">
+                    <div class="genai-card-wrapper">
+                        <div class="genai-card">
+                            <span class="genai-card-badge">Free Trial</span>
+                            <img src="https://i.imgur.com/j4oGq8v.jpg" class="genai-card-img-top" alt="Building AI Agents">
+                            <div class="genai-card-body">
+                                <div>
+                                    <p class="genai-card-subtitle">IBM</p>
+                                    <h5 class="genai-card-title">Building AI Agents and Agentic Workflows</h5>
+                                    <p class="genai-card-subtitle">Specialization</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="genai-card-wrapper">
+                        <div class="genai-card">
+                            <span class="genai-card-badge">Free Trial</span>
+                            <img src="https://i.imgur.com/e7sF7hK.jpg" class="genai-card-img-top" alt="Claude Code">
+                            <div class="genai-card-body">
+                                <div>
+                                    <p class="genai-card-subtitle">Vanderbilt University</p>
+                                    <h5 class="genai-card-title">Claude Code: Software Engineering with Generative AI Agents</h5>
+                                    <p class="genai-card-subtitle">Course</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="genai-card-wrapper">
+                        <div class="genai-card">
+                            <span class="genai-card-badge">Free Trial</span>
+                            <img src="https://i.imgur.com/R3R82yv.jpg" class="genai-card-img-top" alt="AWS Generative AI">
+                            <div class="genai-card-body">
+                                <div>
+                                    <p class="genai-card-subtitle">Amazon Web Services</p>
+                                    <h5 class="genai-card-title">AWS Generative AI for Developers</h5>
+                                    <p class="genai-card-subtitle">Professional Certificate</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+---
+
+<div class="certificate-section">
+    <div class="container">
+        <h2 class="mb-2">Most Popular Certificates</h2>
+        <p class="lead mb-4">Explore our most popular programs, get job-ready for an in-demand career.</p>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card certificate-card h-100 position-relative">
+                    <img src="https://i.imgur.com/0Vd2yJ8.jpg" class="card-img-top certificate-card-img-top" alt="Google Data Analytics">
+                    <div class="certificate-badge-container">
+                        <span class="badge certificate-badge">Free Trial</span>
+                        <span class="badge certificate-badge ai-badge">AI skills</span>
+                    </div>
+                    <div class="certificate-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Google.svg" class="certificate-logo" alt="Google Logo">
+                        <h5 class="certificate-card-title">Google Data Analytics</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-medal me-2"></i>
+                            <span class="certificate-card-subtitle">Professional Certificate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card certificate-card h-100 position-relative">
+                    <img src="https://i.imgur.com/tHq7VbE.jpg" class="card-img-top certificate-card-img-top" alt="Google Project Management">
+                    <div class="certificate-badge-container">
+                        <span class="badge certificate-badge">Free Trial</span>
+                        <span class="badge certificate-badge ai-badge">AI skills</span>
+                    </div>
+                    <div class="certificate-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Google.svg" class="certificate-logo" alt="Google Logo">
+                        <h5 class="certificate-card-title">Google Project Management</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-medal me-2"></i>
+                            <span class="certificate-card-subtitle">Professional Certificate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card certificate-card h-100 position-relative">
+                    <img src="https://i.imgur.com/f0m5r6Z.jpg" class="card-img-top certificate-card-img-top" alt="Google IT Support">
+                    <div class="certificate-badge-container">
+                        <span class="badge certificate-badge">Free Trial</span>
+                        <span class="badge certificate-badge ai-badge">AI skills</span>
+                    </div>
+                    <div class="certificate-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Google.svg" class="certificate-logo" alt="Google Logo">
+                        <h5 class="certificate-card-title">Google IT Support</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-medal me-2"></i>
+                            <span class="certificate-card-subtitle">Professional Certificate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card certificate-card h-100 position-relative">
+                    <img src="https://i.imgur.com/f294gLh.jpg" class="card-img-top certificate-card-img-top" alt="Google UX Design">
+                    <div class="certificate-badge-container">
+                        <span class="badge certificate-badge">Free Trial</span>
+                        <span class="badge certificate-badge ai-badge">AI skills</span>
+                    </div>
+                    <div class="certificate-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Google.svg" class="certificate-logo" alt="Google Logo">
+                        <h5 class="certificate-card-title">Google UX Design</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-medal me-2"></i>
+                            <span class="certificate-card-subtitle">Professional Certificate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="certificate-button-group justify-content-center">
+            <button class="btn certificate-button-primary">Show 8 more</button>
+            <button class="btn certificate-button-outline">View all <i class="fas fa-arrow-right ms-2"></i></button>
+        </div>
+    </div>
+</div>
+
+---
+
+<div class="trending-section certificate-section">
+    <div class="container">
+        <h2 class="mb-2">Trending Now</h2>
+        <p class="lead mb-4">Discover the courses and programs that learners are enrolling in the most right now.</p>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card certificate-card h-100 position-relative">
+                    <img src="https://i.imgur.com/yFqGfXG.jpg" class="card-img-top certificate-card-img-top" alt="Microsoft Project Management">
+                    <div class="certificate-badge-container">
+                        <span class="badge certificate-badge">Free Trial</span>
+                        <span class="badge certificate-badge ai-badge">AI skills</span>
+                    </div>
+                    <div class="certificate-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Microsoft.svg" class="certificate-logo" alt="Microsoft Logo">
+                        <h5 class="certificate-card-title">Microsoft Project Management</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-medal me-2"></i>
+                            <span class="certificate-card-subtitle">Professional Certificate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card certificate-card h-100 position-relative">
+                    <img src="https://i.imgur.com/eB3sY4F.jpg" class="card-img-top certificate-card-img-top" alt="Python for Everybody">
+                    <div class="certificate-badge-container">
+                        <span class="badge certificate-badge">Free Trial</span>
+                    </div>
+                    <div class="certificate-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Michigan.svg" class="certificate-logo" alt="Michigan Logo">
+                        <h5 class="certificate-card-title">Python for Everybody</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-book-open me-2"></i>
+                            <span class="certificate-card-subtitle">Specialization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card certificate-card h-100 position-relative">
+                    <img src="https://i.imgur.com/o7b88lE.jpg" class="card-img-top certificate-card-img-top" alt="Machine Learning">
+                    <div class="certificate-badge-container">
+                        <span class="badge certificate-badge">Free Trial</span>
+                    </div>
+                    <div class="certificate-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Stanford.svg" class="certificate-logo" alt="Multiple educators Logo">
+                        <h5 class="certificate-card-title">Machine Learning</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-book-open me-2"></i>
+                            <span class="certificate-card-subtitle">Specialization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card certificate-card h-100 position-relative">
+                    <img src="https://i.imgur.com/f0w936A.jpg" class="card-img-top certificate-card-img-top" alt="Excel Skills for Business">
+                    <div class="certificate-badge-container">
+                        <span class="badge certificate-badge">Free Trial</span>
+                    </div>
+                    <div class="certificate-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Macquarie.svg" class="certificate-logo" alt="Macquarie University Logo">
+                        <h5 class="certificate-card-title">Excel Skills for Business</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-book-open me-2"></i>
+                            <span class="certificate-card-subtitle">Specialization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="certificate-button-group justify-content-center">
+            <button class="btn certificate-button-primary">Show 8 more</button>
+            <button class="btn certificate-button-outline">View all <i class="fas fa-arrow-right ms-2"></i></button>
+        </div>
+    </div>
+</div>
+
+---
+
+<div class="degree-section">
+    <div class="container">
+        <h2 class="mb-2">Degree Programs</h2>
+        <p class="lead mb-4">Find a top degree that fits your life</p>
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="card degree-card h-100">
+                    <img src="https://i.imgur.com/KxP0QvP.jpg" class="card-img-top degree-card-img-top" alt="University of London">
+                    <div class="degree-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/UniversityOfLondon.svg" class="degree-card-logo" alt="University of London Logo">
+                        <h5 class="degree-card-title">Bachelor of Science in Computer Science</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-graduation-cap me-2"></i>
+                            <span class="degree-card-subtitle">Degree</span>
+                        </div>
+                        <a href="#" class="btn-link">Earn a degree</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card degree-card h-100">
+                    <img src="https://i.imgur.com/X2QeJ6a.jpg" class="card-img-top degree-card-img-top" alt="University of Illinois">
+                    <div class="degree-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Illinois.svg" class="degree-card-logo" alt="University of Illinois Logo">
+                        <h5 class="degree-card-title">Master of Science in Accountancy (iMSA)</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-graduation-cap me-2"></i>
+                            <span class="degree-card-subtitle">Degree</span>
+                        </div>
+                        <a href="#" class="btn-link">Earn a degree</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card degree-card h-100">
+                    <img src="https://i.imgur.com/tE99cE8.jpg" class="card-img-top degree-card-img-top" alt="University of Illinois">
+                    <div class="degree-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Illinois.svg" class="degree-card-logo" alt="University of Illinois Logo">
+                        <h5 class="degree-card-title">Master of Science in Management (iMSM)</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-graduation-cap me-2"></i>
+                            <span class="degree-card-subtitle">Degree</span>
+                        </div>
+                        <a href="#" class="btn-link">Earn a degree</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card degree-card h-100">
+                    <img src="https://i.imgur.com/GzB0fWp.jpg" class="card-img-top degree-card-img-top" alt="University of Huddersfield">
+                    <div class="degree-card-body">
+                        <img src="https://d3njjcbhclacxd.cloudfront.net/web/image/partner_logos/Huddersfield.svg" class="degree-card-logo" alt="University of Huddersfield Logo">
+                        <h5 class="degree-card-title">MSc Management</h5>
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="fa-solid fa-graduation-cap me-2"></i>
+                            <span class="degree-card-subtitle">Degree</span>
+                        </div>
+                        <a href="#" class="btn-link">Earn a degree</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+---
+
+<div class="professional-certificates-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Professional Certificates</h2>
+                    <p class="lead">Get job-ready for an in-demand career</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 certificate-list-column">
+                <h3 class="fw-bold mb-4">Launch your career</h3>
+                <div class="certificate-list-item">
+                    <img src="https://i.imgur.com/qA1R7jB.png" alt="ADP Logo" class="certificate-list-item-logo">
+                    <div class="certificate-list-item-content">
+                        <h5>ADP AIRS® Entry-Level Recruiter Professional Certificate</h5>
+                        <p class="m-0">Offered by **Automatic Data Processing, Inc. (ADP)**</p>
+                        <p class="certificate-list-item-time">3 months at 8 hours per week</p>
+                        <p class="m-0">Prepare for an entry-level job as a recruiter.</p>
+                    </div>
+                    <a href="#" class="btn btn-link ms-auto text-decoration-none">Go to certificate</a>
+                </div>
+                <div class="certificate-list-item">
+                    <img src="https://i.imgur.com/zW0bE4p.png" alt="EC-Council Logo" class="certificate-list-item-logo">
+                    <div class="certificate-list-item-content">
+                        <h5>Information Security Analyst Professional Certificate</h5>
+                        <p class="m-0">Offered by **EC-Council**</p>
+                        <p class="certificate-list-item-time">2 months at 10 hours per week</p>
+                        <p class="m-0">Prepare for an entry-level job as an information security analyst.</p>
+                    </div>
+                    <a href="#" class="btn btn-link ms-auto text-decoration-none">Go to certificate</a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h3 class="fw-bold mb-4">Explore more certificates by category</h3>
+                <div class="certificate-category-box">
+                    <h5>Launch your career</h5>
+                </div>
+                <div class="certificate-category-box">
+                    <h5>Advance your career</h5>
+                </div>
+                <div class="certificate-category-box">
+                    <h5>Change your career</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+---
+
+<div class="role-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="d-flex flex-column h-100">
+                    <h2 class="fw-bold mb-3">Choose your role</h2>
+                    <p class="lead mb-4">Gain the knowledge and skills you need to advance.</p>
+                    <a href="#" class="btn btn-primary mt-auto">Explore all roles</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="https://i.imgur.com/f0w936A.jpg" class="card-img-top" alt="Data Analyst">
+                    <div class="card-body">
+                        <h5 class="card-title">Data Analyst</h5>
+                        <p class="card-text-light mb-2">A Data Analyst collects, cleans, and interprets data, using tools like Excel, SQL, and Tableau to analyze trends and provide insights for decisions.</p>
+                        <p class="card-text-light fw-bold mb-1">If you like:</p>
+                        <div class="d-flex flex-wrap">
+                            <span class="tag-pill">analyzing data</span>
+                            <span class="tag-pill">creating reports</span>
+                            <span class="tag-pill">working with spreadsheets</span>
+                        </div>
+                        <h6 class="mt-3">Credentials</h6>
+                        <ul class="list-unstyled mb-0">
+                            <li class="role-list-item">Meta Data Analyst</li>
+                            <li class="role-list-item">IBM Data Analyst</li>
+                            <li class="role-list-item">+ 5 more</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="https://i.imgur.com/eB3sY4F.jpg" class="card-img-top" alt="Data Scientist">
+                    <div class="card-body">
+                        <h5 class="card-title">Data Scientist</h5>
+                        <p class="card-text-light mb-2">A Data Scientist analyzes large datasets to uncover insights, using statistics, machine learning, and visualization to inform business strategies.</p>
+                        <p class="card-text-light fw-bold mb-1">If you like:</p>
+                        <div class="d-flex flex-wrap">
+                            <span class="tag-pill">complex datasets</span>
+                            <span class="tag-pill">developing machine learning models</span>
+                            <span class="tag-pill">statistical problems</span>
+                        </div>
+                        <h6 class="mt-3">Credentials</h6>
+                        <ul class="list-unstyled mb-0">
+                            <li class="role-list-item">IBM Data Science</li>
+                            <li class="role-list-item">+ 1 more</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <img src="https://i.imgur.com/yFqGfXG.jpg" class="card-img-top" alt="Machine Learning Engineer">
+                    <div class="card-body">
+                        <h5 class="card-title">Machine Learning Engineer</h5>
+                        <p class="card-text-light mb-2">A Machine Learning Engineer builds and optimizes algorithms that enable computers to learn from data, using large datasets and neural networks.</p>
+                        <p class="card-text-light fw-bold mb-1">If you like:</p>
+                        <div class="d-flex flex-wrap">
+                            <span class="tag-pill">developing models</span>
+                            <span class="tag-pill">working with large datasets</span>
+                            <span class="tag-pill">coding in Python or R</span>
+                        </div>
+                        <h6 class="mt-3">Credentials</h6>
+                        <ul class="list-unstyled mb-0">
+                            <li class="role-list-item">Machine Learning</li>
+                            <li class="role-list-item">MathWorks Computer Vision Engineer</li>
+                            <li class="role-list-item">+ 1 more</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+---
+
+<div class="container courses-section">
+    <h2 class="fw-bold mb-4">A broad selection of courses</h2>
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="card course-card">
+                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97" class="card-img-top" alt="Course Image">
+                <div class="card-body">
+                    <h5 class="card-title">Machine Learning</h5>
+                    <p class="card-text-light">Stanford University</p>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fa-solid fa-star text-warning me-1"></i>
+                        <span class="card-text-light">4.8 (85k reviews)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card course-card">
+                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713" class="card-img-top" alt="Course Image">
+                <div class="card-body">
+                    <h5 class="card-title">Full Stack Web Development</h5>
+                    <p class="card-text-light">IBM</p>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fa-solid fa-star text-warning me-1"></i>
+                        <span class="card-text-light">4.7 (50k reviews)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card course-card">
+                <img src="https://images.unsplash.com/photo-1531746790730-22e6b010c710" class="card-img-top" alt="Course Image">
+                <div class="card-body">
+                    <h5 class="card-title">Digital Marketing</h5>
+                    <p class="card-text-light">Google</p>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fa-solid fa-star text-warning me-1"></i>
+                        <span class="card-text-light">4.6 (62k reviews)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card course-card">
+                <img src="https://images.unsplash.com/photo-1521737711867-e3b973752e03" class="card-img-top" alt="Course Image">
+                <div class="card-body">
+                    <h5 class="card-title">Cybersecurity</h5>
+                    <p class="card-text-light">University of London</p>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fa-solid fa-star text-warning me-1"></i>
+                        <span class="card-text-light">4.9 (45k reviews)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
